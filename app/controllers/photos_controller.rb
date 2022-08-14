@@ -1,11 +1,23 @@
 class PhotosController < ApplicationController
+  def comment_record
+    comment = Comment.new
+
+    comment.author_id = params.fetch("input_author_id")
+    comment.photo_id = params.fetch("input_photo_id")
+    comment.body = params.fetch("input_body")
+
+    comment.save
+
+    redirect_to("/photos/#{comment.photo_id}")
+  end
+
   def index
     @photos = Photo.all
     render({ :template => "photos/all_photos.html.erb"})
   end
 
   def create
-    user_id = params.fetch("input_owner_id")
+    user_id = session.fetch(:user_id)
     image = params.fetch("input_image")
     caption = params.fetch("input_caption")
     photo = Photo.new

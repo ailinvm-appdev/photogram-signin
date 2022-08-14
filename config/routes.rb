@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get("/user_sign_out", { :controller => "users", :action => "toast_cookies"})
   get("/user_sign_in", { :controller => "users", :action => "new_session_form"})
   post("/verify_credentials", { :controller => "users", :action => "authenticate"})
+  post("/insert_comment_record",{ :controller => "photos", :action => "comment_record"})
   # CREATE
   get("/insert_user_record", {:controller => "users", :action => "create" })
 
